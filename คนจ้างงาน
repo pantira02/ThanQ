@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>จองคิวแทนคุณ - ฝั่งผู้จ้างงาน</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <style>
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background-color: #f0f8ff;
+      padding: 20px;
+    }
+    h1 {
+      color: #004a99;
+      text-align: center;
+    }
+    form {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: auto;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 20px;
+      width: 100%;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>📌 แบบฟอร์มจองคิวแทนคุณ</h1>
+
+  <form id="bookingForm">
+    <label>ชื่อ-นามสกุล</label>
+    <input type="text" name="fullname" required>
+
+    <label>เบอร์โทร / LINE ID</label>
+    <input type="text" name="contact" required>
+
+    <label>ประเภทบริการ</label>
+    <select name="service">
+      <option value="ต่อแถว">ต่อแถว</option>
+      <option value="รับหิ้วสินค้า">รับหิ้วสินค้า</option>
+      <option value="ไปแทนแฟนคลับ">ไปแทนแฟนคลับ</option>
+      <option value="นั่งเป็นเพื่อน">นั่งเป็นเพื่อน</option>
+    </select>
+
+    <label>วัน/เวลา</label>
+    <input type="datetime-local" name="datetime" required>
+
+    <label>สถานที่</label>
+    <input type="text" name="location" required>
+
+    <label>ค่าจ้างที่เสนอ (บาท)</label>
+    <input type="number" name="payment" required>
+
+    <label>รายละเอียดเพิ่มเติม</label>
+    <textarea name="details" rows="3"></textarea>
+
+    <button type="submit">📤 ส่งคำจอง</button>
+  </form>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwj-7yeQr92gF45wabN7VP06EuGUY3Xn9LH8l1o9iHUchp6NW_ATq2ql4gudC4DtC9CQw/exec";
+    const form = document.getElementById('bookingForm');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => alert("📬 ส่งข้อมูลสำเร็จแล้ว!"))
+        .catch(error => alert("❌ เกิดข้อผิดพลาด: " + error.message));
+    });
+  </script>
+</body>
+</html>
